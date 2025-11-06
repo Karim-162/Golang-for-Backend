@@ -4,10 +4,12 @@ import "fmt"
 
 /*
 there are 3 conditions if any one of them are true then it can be called
-a higher order function
+a higher order function and it is also called first class function
 1.If a function has received as a parameter
 2.If the function has return
 3.Both
+[imp: a variable which can store any type and also function in it is called first class citizen.
+EX: a:= func(){}]
 */
 func processOperation(a int, b int, op func(x int, y int)){
 	op(a,b)
