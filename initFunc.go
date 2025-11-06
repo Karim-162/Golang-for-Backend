@@ -8,6 +8,6 @@ func main(){
 }
 
 func init(){
-	fmt.Println(a)
+	fmt.Println("a = ",a," and this println is from init function not from main function")
 	a=20
 }
