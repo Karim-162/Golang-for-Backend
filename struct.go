@@ -3,15 +3,29 @@ package main
 import "fmt"
 
 
-func processOperation(a int, b int, op func(x int, y int)){
-	op(a,b)
-}
-
-func add(n1 int, n2 int){
-	sum:=n1+n2
-	fmt.Println(sum)
+type User struct{
+	Name string //these Name and Age are member variable or property 
+	Age int
 }
 
 func main(){
-	processOperation(4,7,add)
+	var user1 User
+	/*eije amra User type er Name and Age egula k nicchi shegulake Instance o bola hoi
+	to amra line 16 er jonno bolte pari j amra User type er jonno ekta instance or
+	object create korsi
+	*/
+	user1=User{
+		Name:"habib",
+		Age:30,
+	}
+	fmt.Println("Name: ",user1.Name)
+	fmt.Println("Age: ",user1.Age)
+
+	
+	user2:=User{
+		Name:"Sazin",
+		Age:25,
+	}
+	fmt.Println("Name: ",user2.Name)
+	fmt.Println("Age: ",user2.Age)
 }
