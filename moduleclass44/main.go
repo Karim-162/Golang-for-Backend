@@ -10,10 +10,13 @@ func aboutHandler(w http.ResponseWriter, r *http.Request){
 }
 
 func main(){
-	mux:=http.NewServeMux()
-	mux.HandleFunc("/hello",helloHandler)
-	mux.HandleFunc("/about",aboutHandler)
-
+	mux:=http.NewServeMux()//NewServeMux() eta struct type er and eta ekta pointer mux variable a rakhtese
+	mux.HandleFunc("/hello",helloHandler)// HandleFunc eta ekta receiver function jeta argument hishebe string ar ekta handler function nei
+	mux.HandleFunc("/about",aboutHandler)// HandleFunc eta ekta receiver function jeta argument hishebe string ar ekta handler function nei
+	//mux ta hocche Router
+	//"/hello" "/about" ei string pattern guloke diye call korake bola hoi route
+	//so main thing is amra router diye multiple route banate pari
+	
 	fmt.Println("Server Running On:3000")
 
 	err:= http.ListenAndServe(":3000",mux)
