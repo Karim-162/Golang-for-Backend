@@ -23,6 +23,7 @@ type Product struct {
 
 var productList []Product
 
+// GET API
 func getproducts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
@@ -36,12 +37,39 @@ func getproducts(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// POST API
+func createProduct(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method != "POST" {
+		http.Error(w, "plz give me POST request", 400)
+	}
+
+	var newProduct Product
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(&newProduct)
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, "plz give me valid json", 400)
+		return
+	}
+
+	newProduct.ID = len(productList) + 1
+	productList = append(productList, newProduct)
+
+	encoder := json.NewEncoder(w)
+	encoder.Encode(newProduct)
+
+}
+
 func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/hello", hellohandler)
 	mux.HandleFunc("/about", abouthandler)
 	mux.HandleFunc("/products", getproducts)
+	mux.HandleFunc("/createProduct", createProduct)
 
 	fmt.Println("server running on :3000")
 	err := http.ListenAndServe(":3000", mux)
